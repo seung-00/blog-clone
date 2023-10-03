@@ -1,52 +1,43 @@
 module.exports = {
   parserPreset: {
     parserOpts: {
-      headerPattern: /(?:(\[\w+\]\s))?(?:(:\w+:)\s)(.+)/,
-      headerCorrespondence: ['issue', 'type', 'subject'],
+      headerPattern: /^(?:\[(.+)\]:)?\s*(\w+):\s(.+)$/,
+      headerCorrespondence: ["issue", "type", "subject"],
     },
   },
   plugins: [
     {
       rules: {
-        'header-match-team-pattern': (parsed) => {
-          const { type, subject } = parsed
-          if (!type || !subject) {
-            return [false, "header must be in format ':gitmoji: subject'"]
-          }
-          return [true, '']
-        },
-        'gitmoji-type-enum': (parsed, _when, expectedValue) => {
+        "type-enum": (parsed, _when, expectedValue) => {
           const { type } = parsed
           if (type && !expectedValue.includes(type)) {
             return [
               false,
-              `type must be one of ${expectedValue}. see https://gitmoji.dev`,
+              `type must be one of ${expectedValue.join("", "")}`
             ]
           }
-          return [true, '']
+          return [true, ""]
         },
       },
     },
   ],
   rules: {
-    'header-match-team-pattern': [2, 'always'],
-    'gitmoji-type-enum': [
+    "type-enum": [
       2,
-      'always',
+      "always",
       [
-        ':bug:', // 버그
-        ':sparkles:', // 신규
-        ':recycle:', // 리팩토링
-        ':fire:', // 삭제
-        ':memo:', // 블로그 글
-        ':boom:', // breaking changes
-        ':lipstick:', // 마크업, 스타일
-        ':green_heart:', // ci 수정
-        ':wrench:', // 환경 변경
-        ':truck:', // 이름경로 변경
-        ':rocket:', // 배포
-        ':label:', // 타입
-        ':package:', // 패키지 신규 설치
+        "fix", // 버그 수정
+        "feat", // 신규 기능
+        "refactor", // 리팩토링
+        "remove", // 삭제
+        "blog", // 블로그 글
+        "breaking", // breaking changes
+        "style", // 스타일 변경
+        "ci", // ci 수정
+        "chore", // 기타 변경
+        "deploy", // 배포
+        "type", // 타입 변경
+        "install" // 패키지 신규 설치
       ],
     ],
   },

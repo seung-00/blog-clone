@@ -1,15 +1,15 @@
 {
-  "name": "yceffort-blog",
+  "name": "holden-log",
   "version": "1.0.0",
-  "description": "yceffort-blog",
+  "description": "holden-log",
   "keywords": [
     "react",
     "nextjs",
     "blog"
   ],
-  "repository": "https://github.com/yceffort/yceffort-blog-v2",
+  "repository": "https://github.com/seung-00/holden-log",
   "license": "MIT",
-  "author": "yceffort <root@yceffort.kr>",
+  "author": "seung-00 <seung-00@naver.com>",
   "scripts": {
     "build": "next build",
     "dev": "next dev",
